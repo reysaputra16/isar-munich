@@ -1,14 +1,10 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { signIn, getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import LoginForm from "@components/LoginForm";
-import { useSearchParams } from "next/navigation";
 
 const SignInPage = ({ loginInfo, setLoginInfo }) => {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
   const router = useRouter();
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
