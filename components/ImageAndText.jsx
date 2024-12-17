@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ImageAndText = () => {
   return (
-    <section className="flex flex-wrap items-center w-full mt-16">
+    <section className="flex flex-wrap items-center w-full mt-16 bg-lightBlue rounded-lg">
       {/* Image section */}
       <div className="w-full md:w-1/2 flex items-center justify-center">
         <Image

@@ -2,7 +2,7 @@ import SportCard from "./SportCard";
 
 const SportCardList = () => {
   return (
-    <div className="space-y-6 py-8 xs:columns-1 sm:gap-6 md:columns-3">
+    <div className="space-y-6 py-6 xs:columns-1 sm:gap-9 md:columns-3">
       <SportCard
         title="Futsal"
         imageSrc="/images/futsal.png"
