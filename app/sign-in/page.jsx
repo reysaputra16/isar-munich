@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { signIn, getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import LoginForm from "@components/LoginForm";
@@ -36,7 +36,9 @@ const SignInPage = ({ loginInfo, setLoginInfo }) => {
         </div>
       ) : (
         <section className="w-full max-w-[500px] flex-center flex-col">
-          <LoginForm />
+          <Suspense>
+            <LoginForm />
+          </Suspense>
           {/* <form className="mt-5 w-full flex flex-col gap-7 glassmorphism">
             <h2 className="font-satoshi font-semibold text-center text-gray-700 mt-3">
               Or Sign In With:
