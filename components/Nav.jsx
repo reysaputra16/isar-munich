@@ -45,7 +45,11 @@ const Nav = () => {
             </button>
             <Link href="/">
               {session?.user.image === "" ? (
-                <CircleUserRound width={37} height={37} />
+                <CircleUserRound
+                  width={37}
+                  height={37}
+                  className="text-brokenWhite"
+                />
               ) : (
                 <Image
                   src={session?.user.image}

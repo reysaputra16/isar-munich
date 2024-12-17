@@ -25,6 +25,7 @@ const handler = NextAuth({
                 }
             }, 
             async authorize(credentials, req) {
+                await connectToDB();
                 // Logic to look up user in MongoDB
                 const userExist = await User.findOne({email: credentials.email, password: credentials.password});
                 if(userExist) {
