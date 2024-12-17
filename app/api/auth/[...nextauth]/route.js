@@ -35,7 +35,7 @@ const handler = NextAuth({
             }
         })
     ],
-    secret: PROCESS.ENV.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         error: '/sign-in',
     },
