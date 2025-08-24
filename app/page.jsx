@@ -10,16 +10,18 @@ const Home = () => {
       <section className="w-full flex-center flex-col">
         <h1 className="head_text text-center">
           <span className="text-lg text-neonGreen">#MENUJUEV</span>
-          <br className="max-md:hidden" />
-          Organisasi Olahraga di <br className="max-md:hidden" />
-          <span className="red_gradient text-center">Munich</span>
+          <br className="" />
+          ISAR
+          <span className="red_gradient text-center"> Munich</span>
         </h1>
-        <p className="mt-5 text-brokenWhite font-normal text-lg">
-          Meningkatkan kualitas olahraga untuk warga Indonesia di Munich
+        <p className="mt-5 text-brokenWhite font-normal text-lg max-md:hidden">
+          Komunitas Olahraga Indonesia di Munich
         </p>
+        {/*
         <button type="button" className="head_btn mt-10">
           <Link href="/register">Register Here</Link>
         </button>
+        */}
       </section>
       {/* Image and Text Section */}
       {/* <ImageAndText /> */}

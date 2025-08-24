@@ -33,7 +33,7 @@ const Nav = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">OOM</p>
+        <p className="logo_text">ISAR</p>
       </Link>
 
       {/* Desktop Navigation */}
@@ -43,7 +43,7 @@ const Nav = () => {
             <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>
-            <Link href="/">
+            <Link href="/profile">
               {session?.user.image === "" ? (
                 <CircleUserRound
                   width={37}
@@ -105,6 +105,7 @@ const Nav = () => {
                   type="button"
                   onClick={() => {
                     setToggleMenu(false);
+                    signOut();
                   }}
                 >
                   Sign Out
@@ -112,16 +113,20 @@ const Nav = () => {
               </div>
             ) : (
               <div className="dropdown">
-                <button
-                  type="button"
-                  className="outline_btn"
+                <Link
+                  href="/register"
+                  className="dropdown_link"
                   onClick={() => setToggleMenu(false)}
                 >
-                  <Link href="/register">Register Here</Link>
-                </button>
-                <button type="button" className="black_btn">
-                  <Link href="/sign-in">Sign In</Link>
-                </button>
+                  Register Here
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="dropdown_link"
+                  onClick={() => setToggleMenu(false)}
+                >
+                  Sign In
+                </Link>
               </div>
             )}
           </>

@@ -25,7 +25,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-4 text-sm md:mt-0">
-          © {new Date().getFullYear()} OOM. All rights reserved.
+          © {new Date().getFullYear()} ISAR. All rights reserved.
         </div>
       </div>
     </footer>
