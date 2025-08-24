@@ -23,3 +23,27 @@ export const ideasList = [
 
     },
 ]
+
+export const sportsCardContent = [
+    {
+        title: "Futsal",
+        imageSrc: "/images/futsal.png",
+        alt: "futsal-photo",
+        backTitle: "Futsal",
+        backContent: "main bola terus",
+    },
+    {
+        title:"Basket",
+        imageSrc:"/images/basket.png",
+        alt:"basket-photo",
+        backTitle:"Basketball",
+        backContent:"main basket terus",
+    },
+    {
+        title:"Voli",
+        imageSrc:"/images/volley.png",
+        alt:"volley-photo",
+        backTitle:"Volleyball",
+        backContent:"main voli terus",
+    }
+]
