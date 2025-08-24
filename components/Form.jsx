@@ -1,17 +1,20 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { countries, getEmojiFlag } from "countries-list";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   const [birthDateError, setBirthDateError] = useState("");
   const [streetError, setStreetError] = useState("");
   const [postalCodeError, setPostalCodeError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   // Regex for date format
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{3}$/;
+  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d\d$/;
   const streetRegex =
-    /^([A-Za-zäöüßÄÖÜ-]+(?:[-\s][A-Za-zäöüßÄÖÜ]+)*(?:straße|str\.|allee|weg|platz|gasse)?)\s+(\d{1,4}[a-zA-Z]?)$/;
+    /^([A-Za-zäöüßÄÖÜ-]+(?:[-\s][A-Za-zäöüßÄÖÜ]+)*(?:[sS]traße|[sS]tr\.|[aA]llee|[wW]eg|[pP]latz|[gG]asse)?)\s+(\d{1,4}[a-zA-Z]?)$/;
   const postCodeRegex = /^\d{5}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   return (
     <section className="w-full max-w-full flex-start flex-col">
@@ -20,7 +23,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="mt-10 w-full flex flex-col gap-7 glassmorphism"
+        className="mt-10 w-full flex flex-col gap-7"
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-white">
@@ -54,16 +57,16 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             value={post.address}
             onChange={(e) => {
               setPost({ ...post, address: e.target.value });
-              if (!streetRegex.test(post.address)) {
+              if (!streetRegex.test(e.target.value)) {
                 setStreetError("Street is not correctly written");
               } else {
                 setStreetError("");
               }
             }}
-            placeholder="Street"
+            placeholder="Address"
             required
             className="form_input"
-            pattern="^([A-Za-zäöüßÄÖÜ-]+(?:[-\s][A-Za-zäöüßÄÖÜ]+)*(?:straße|str\.|allee|weg|platz|gasse)?)\s+(\d{1,4}[a-zA-Z]?)$"
+            pattern="^([A-Za-zäöüßÄÖÜ-]+(?:[-\s][A-Za-zäöüßÄÖÜ]+)*(?:[sS]traße|[sS]tr\.|[aA]llee|[wW]eg|[pP]latz|[gG]asse)?)\s+(\d{1,4}[a-zA-Z]?)$"
           />
           {streetError && <p className="text-red-500">{streetError}</p>}
         </label>
@@ -75,7 +78,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             value={post.postCode}
             onChange={(e) => {
               setPost({ ...post, postCode: e.target.value });
-              if (!postCodeRegex.test(post.postCode)) {
+              if (!postCodeRegex.test(e.target.value)) {
                 setPostalCodeError("Format: XXXXX");
               } else {
                 setPostalCodeError("");
@@ -118,9 +121,17 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           </span>
           <input
             value={post.email}
-            onChange={(e) => setPost({ ...post, email: e.target.value })}
+            onChange={(e) => {
+              setPost({ ...post, email: e.target.value });
+              if (!emailRegex.test(e.target.value)) {
+                setEmailError("E-Mail does not have a valid format");
+              } else {
+                setEmailError("");
+              }
+            }}
             placeholder="E-Mail"
             required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             className="form_input"
             type="email"
           />
@@ -146,7 +157,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             value={post.birthDate}
             onChange={(e) => {
               setPost({ ...post, birthDate: e.target.value });
-              if (!dateRegex.test(post.birthDate)) {
+              if (!dateRegex.test(e.target.value)) {
                 setBirthDateError(
                   "Please enter a valid date in DD.MM.YYYY format."
                 );
@@ -156,7 +167,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             }}
             placeholder="Birth Date"
             required
-            pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d{2}$"
+            pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d\d$"
             className="form_input"
           />
           {birthDateError && <p className="text-red-500">{birthDateError}</p>}
@@ -165,6 +176,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <span className="font-satoshi font-semibold text-base text-white">
             Nationality
           </span>
+          {/*
           <input
             value={post.nationality}
             onChange={(e) => setPost({ ...post, nationality: e.target.value })}
@@ -172,6 +184,18 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             required
             className="form_input"
           />
+          */}
+          <select className="form_input">
+            <option selected key="NONE" value="NONE">
+              Choose Nationality
+            </option>
+            {Object.entries(countries).map(([code, country]) => (
+              <option key={code} value={code}>
+                {getEmojiFlag(code)}&#160;
+                {country.name}
+              </option>
+            ))}
+          </select>
         </label>
         <div className="flex-end mx-3 mb-5 gap-4">
           <Link href="/" className="text-white text-sm">

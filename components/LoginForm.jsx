@@ -20,7 +20,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <div className="w-full max-w-full flex-center flex-col">
       <h1 className="head_text text-center">
         <span className="lime_gradient">Sign In</span>
       </h1>
@@ -35,7 +35,7 @@ const LoginForm = () => {
       ) : (
         <></>
       )}
-      <form className="mt-10 w-[500px] flex flex-col gap-7 glassmorphism">
+      <form className="mt-10 xl:w-[500px] sm:w-[350px] md:w-[400px] flex flex-col gap-7 glassmorphism">
         <label>
           <span className="font-satoshi font-semibold text-base text-white">
             E-Mail Address
