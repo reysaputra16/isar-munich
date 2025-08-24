@@ -43,7 +43,11 @@ const UserSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    confirmEmail: {
+        type: Boolean,
+        default: false,
+    },
 
 });
 
