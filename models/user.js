@@ -37,9 +37,8 @@ const UserSchema = new Schema({
         required: [true, 'Nationality is required!'],
     },
     birthDate: {
-        type: String,
+        type: Date,
         required: [true, 'Birth Date is required!'],
-        match: /^\d{2}\.\d{2}\.\d{4}$/, // DD.MM.YYYY validation
     },
     image: {
         type: String,

@@ -10,7 +10,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   const [emailError, setEmailError] = useState("");
 
   // Regex for date format
-  const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d\d$/;
+  const dateRegex = /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
   const streetRegex =
     /^([A-Za-zäöüßÄÖÜ-]+(?:[-\s][A-Za-zäöüßÄÖÜ]+)*(?:[sS]traße|[sS]tr\.|[aA]llee|[wW]eg|[pP]latz|[gG]asse)?)\s+(\d{1,4}[a-zA-Z]?)$/;
   const postCodeRegex = /^\d{5}$/;
@@ -153,6 +153,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <span className="font-satoshi font-semibold text-base text-white">
             Birth Date
           </span>
+          {/*
           <input
             value={post.birthDate}
             onChange={(e) => {
@@ -170,6 +171,20 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19|20)\d\d$"
             className="form_input"
           />
+          */}
+          <input
+            type="date"
+            onChange={(e) => {
+              setPost({ ...post, birthDate: e.target.value });
+              if (!dateRegex.test(e.target.value)) {
+                setBirthDateError("Please enter in your Birth Date");
+              } else {
+                setBirthDateError("");
+              }
+            }}
+            required
+            className="form_input"
+          />
           {birthDateError && <p className="text-red-500">{birthDateError}</p>}
         </label>
         <label>
@@ -185,8 +200,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className="form_input"
           />
           */}
-          <select className="form_input">
-            <option selected key="NONE" value="NONE">
+          <select
+            className="form_input"
+            defaultValue="choose"
+            onChange={(e) => setPost({ ...post, nationality: e.target.value })}
+          >
+            <option key="choose" value="choose">
               Choose Nationality
             </option>
             {Object.entries(countries).map(([code, country]) => (

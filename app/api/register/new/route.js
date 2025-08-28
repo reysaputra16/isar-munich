@@ -16,7 +16,7 @@ export const POST = async (req) => {
             email: email, 
             password: password,
             nationality: nationality, 
-            birthDate: birthDate,
+            birthDate: new Date(birthDate),
             image: "",
         });
 
